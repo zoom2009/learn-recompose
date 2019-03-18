@@ -5,18 +5,21 @@ const Loading = () => (
     <div>Loading...</div>
 )
 
-const ContentWithLoading = ({loading, loading2, isActive, handleClick, title}) => (
+const ContentWithLoading = ({loading, loading2, MethodAlert, handleAlert, color, isActive, handleTextChange, handleClickSetActive, title}) => (
     <div style={{backgroundColor: '#ccc'}}>  
         <h4>{title}</h4>
         <p>current loading is : {loading ? 'true' : 'false'}</p>
         <p>current loading2 is : {loading2 ? 'true' : 'false'}</p>
-        <div style={{color: isActive ? 'red' : 'black'}}>
+        <div style={{color: isActive ? color : 'black'}}>
             Ea sunt ipsum esse cillum sunt consectetur anim culpa.<br />
             Ea sunt ipsum esse cillum sunt consectetur anim culpa.<br />
             Ea sunt ipsum esse cillum sunt consectetur anim culpa.<br />
             Ea sunt ipsum esse cillum sunt consectetur anim culpa.<br />
         </div>
-        <button onClick={handleClick}>Set Active</button>
+        <input onChange={handleTextChange} type='text' />
+        <button onClick={handleClickSetActive}>Set Color Active</button>
+        <button onClick={handleAlert}>Click for Alert</button>
+        <button onClick={MethodAlert}>Click for Alert2</button>
     </div>
 )
 
@@ -24,8 +27,11 @@ const enhance = compose(
     withState('loading', 'setLoading', true), // stateName, setStateFN, initState
     withState('loading2', 'setLoading2', false),
     withState('isActive', 'setActive', false),
+    withState('color', 'setColor', 'black'),
     withHandlers({
-        handleClick: props => event => props.setActive(!props.isActive)
+        handleClickSetActive: props => event => props.setActive(!props.isActive),
+        handleTextChange: props => event => props.setColor(event.target.value),
+        handleAlert: props => () => props.MethodAlert()
     }),
     lifecycle({
         componentDidMount() {

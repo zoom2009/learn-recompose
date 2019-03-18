@@ -11,7 +11,10 @@ export default class App extends Component {
         <Counter />
         <ListItem title="HOC" body="Hello World HOC" />
         <CardOpen title="WITH STATE" content="Hello withState" />
-        <ContentWithLoading title="Hello Branch"/>
+        <ContentWithLoading 
+          title="Hello Branch"
+          MethodAlert={() => {alert('hi dad')}}
+          />
       </div>
     )
   }
